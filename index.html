@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,6 @@
         }
 
         :root {
-            /* Doepfer A-100 inspired color scheme */
             --panel-silver: #c5c5c5;
             --panel-light: #d8d8d8;
             --panel-dark: #a0a0a0;
@@ -24,7 +24,6 @@
             --led-orange: #ff8800;
             --patch-cable: #ff3333;
 
-            /* Event type colors - muted for synth aesthetic */
             --primary: #404040;
             --secondary: #606060;
             --dark: #1a1a1a;
@@ -42,13 +41,11 @@
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background: #2a2a2a;
             background-image:
-                repeating-linear-gradient(
-                    0deg,
+                repeating-linear-gradient(0deg,
                     transparent,
                     transparent 2px,
-                    rgba(0,0,0,0.1) 2px,
-                    rgba(0,0,0,0.1) 4px
-                );
+                    rgba(0, 0, 0, 0.1) 2px,
+                    rgba(0, 0, 0, 0.1) 4px);
             min-height: 100vh;
             padding: 10px;
         }
@@ -57,17 +54,17 @@
             max-width: 1400px;
             margin: 0 auto;
             background: linear-gradient(180deg,
-                var(--panel-light) 0%,
-                var(--panel-silver) 20%,
-                var(--panel-silver) 80%,
-                var(--panel-dark) 100%);
+                    var(--panel-light) 0%,
+                    var(--panel-silver) 20%,
+                    var(--panel-silver) 80%,
+                    var(--panel-dark) 100%);
             border: 3px solid var(--knob-black);
             border-radius: 0;
             overflow: hidden;
             box-shadow:
-                inset 0 2px 4px rgba(255,255,255,0.3),
-                inset 0 -2px 4px rgba(0,0,0,0.3),
-                0 10px 30px rgba(0,0,0,0.5);
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+                0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         header {
@@ -98,11 +95,77 @@
             opacity: 0.8;
         }
 
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 4px;
+            background: var(--panel-dark);
+            padding: 4px;
+            border-radius: 8px;
+            box-shadow:
+                inset 0 2px 4px rgba(0, 0, 0, 0.5),
+                0 1px 2px rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-btn {
+            width: 45px;
+            height: 35px;
+            background: linear-gradient(180deg,
+                    var(--panel-light) 0%,
+                    var(--panel-dark) 100%);
+            border: 2px solid var(--knob-black);
+            border-radius: 4px;
+            color: var(--text-black);
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.1s;
+            box-shadow:
+                inset 0 1px 2px rgba(255, 255, 255, 0.3),
+                0 2px 3px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .lang-btn:hover {
+            transform: translateY(1px);
+            box-shadow:
+                inset 0 1px 2px rgba(255, 255, 255, 0.2),
+                0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(180deg,
+                    var(--panel-dark) 0%,
+                    var(--knob-black) 100%);
+            color: var(--led-green);
+            box-shadow:
+                inset 0 2px 4px rgba(0, 0, 0, 0.6),
+                0 1px 2px rgba(0, 0, 0, 0.3);
+            transform: translateY(2px);
+        }
+
+        .lang-btn.active::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--led-green);
+            border-radius: 50%;
+            bottom: 4px;
+            right: 4px;
+            box-shadow: 0 0 6px var(--led-green);
+            animation: pulse 2s infinite ease-in-out;
+        }
+
         .controls {
             background: var(--panel-silver);
             padding: 20px;
             border-bottom: 2px solid var(--knob-black);
-            box-shadow: inset 0 -1px 2px rgba(0,0,0,0.2);
+            box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .day-tabs {
@@ -126,8 +189,8 @@
             letter-spacing: 1px;
             color: var(--text-black);
             box-shadow:
-                inset 0 1px 2px rgba(255,255,255,0.5),
-                0 2px 4px rgba(0,0,0,0.3);
+                inset 0 1px 2px rgba(255, 255, 255, 0.5),
+                0 2px 4px rgba(0, 0, 0, 0.3);
             position: relative;
         }
 
@@ -148,16 +211,16 @@
         .day-tab:hover {
             transform: translateY(1px);
             box-shadow:
-                inset 0 1px 3px rgba(0,0,0,0.3),
-                0 1px 2px rgba(0,0,0,0.3);
+                inset 0 1px 3px rgba(0, 0, 0, 0.3),
+                0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .day-tab.active {
             background: linear-gradient(180deg, #808080 0%, #606060 100%);
             color: var(--panel-silver);
             box-shadow:
-                inset 0 2px 4px rgba(0,0,0,0.5),
-                0 1px 2px rgba(0,0,0,0.3);
+                inset 0 2px 4px rgba(0, 0, 0, 0.5),
+                0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .day-tab.active::after {
@@ -166,7 +229,6 @@
             animation: lfo-blink 1.2s infinite ease-in-out;
         }
 
-        /* Different LFO speeds for each day */
         .day-tab[data-day="2025-11-12"].active::after {
             animation: lfo-slow 2.5s infinite ease-in-out;
         }
@@ -187,36 +249,87 @@
             animation: lfo-veryfast 0.5s infinite ease-in-out;
         }
 
-        /* LFO-style blinking animations with different rates */
         @keyframes lfo-slow {
-            0% { opacity: 0.2; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.1); }
-            100% { opacity: 0.2; transform: scale(0.8); }
+            0% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
         }
 
         @keyframes lfo-medium {
-            0% { opacity: 0.3; }
-            40% { opacity: 1; }
-            60% { opacity: 1; }
-            100% { opacity: 0.3; }
+            0% {
+                opacity: 0.3;
+            }
+
+            40% {
+                opacity: 1;
+            }
+
+            60% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.3;
+            }
         }
 
         @keyframes lfo-blink {
-            0%, 100% { opacity: 0.4; box-shadow: 0 0 3px var(--led-green); }
-            50% { opacity: 1; box-shadow: 0 0 12px var(--led-green); }
+
+            0%,
+            100% {
+                opacity: 0.4;
+                box-shadow: 0 0 3px var(--led-green);
+            }
+
+            50% {
+                opacity: 1;
+                box-shadow: 0 0 12px var(--led-green);
+            }
         }
 
         @keyframes lfo-fast {
-            0% { opacity: 0.1; }
-            25% { opacity: 1; }
-            50% { opacity: 0.1; }
-            75% { opacity: 1; }
-            100% { opacity: 0.1; }
+            0% {
+                opacity: 0.1;
+            }
+
+            25% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.1;
+            }
+
+            75% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.1;
+            }
         }
 
         @keyframes lfo-veryfast {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         .filters {
@@ -273,7 +386,7 @@
             gap: 15px;
             padding: 15px;
             background: var(--panel-silver);
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .schedule-container {
@@ -281,23 +394,21 @@
             overflow-y: auto;
             max-height: calc(100vh - 200px);
             background: linear-gradient(180deg,
-                rgba(200,200,200,0.3) 0%,
-                rgba(150,150,150,0.3) 100%);
+                    rgba(200, 200, 200, 0.3) 0%,
+                    rgba(150, 150, 150, 0.3) 100%);
             border: 1px solid var(--panel-dark);
             padding: 5px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .schedule-timeline {
             display: block;
             position: relative;
-            background: repeating-linear-gradient(
-                90deg,
-                transparent 0px,
-                transparent 49px,
-                rgba(0,0,0,0.05) 49px,
-                rgba(0,0,0,0.05) 50px
-            );
+            background: repeating-linear-gradient(90deg,
+                    transparent 0px,
+                    transparent 49px,
+                    rgba(0, 0, 0, 0.05) 49px,
+                    rgba(0, 0, 0, 0.05) 50px);
         }
 
         .venue-headers {
@@ -319,12 +430,10 @@
             gap: 10px;
             position: relative;
             padding: 0 10px;
-            background: linear-gradient(
-                to bottom,
-                transparent 0%,
-                transparent calc(100% - 1px),
-                #e0e0e0 100%
-            );
+            background: linear-gradient(to bottom,
+                    transparent 0%,
+                    transparent calc(100% - 1px),
+                    #e0e0e0 100%);
             background-size: 100% 60px;
         }
 
@@ -354,13 +463,11 @@
             border-left: 1px solid #e0e0e0;
             padding-left: 8px;
             padding-right: 3px;
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent 0px,
-                transparent 74px,
-                rgba(224, 224, 224, 0.2) 74px,
-                rgba(224, 224, 224, 0.2) 75px
-            );
+            background: repeating-linear-gradient(to bottom,
+                    transparent 0px,
+                    transparent 74px,
+                    rgba(224, 224, 224, 0.2) 74px,
+                    rgba(224, 224, 224, 0.2) 75px);
         }
 
         .venue-header {
@@ -374,7 +481,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow:
-                inset 0 2px 4px rgba(0,0,0,0.5);
+                inset 0 2px 4px rgba(0, 0, 0, 0.5);
             position: relative;
             min-height: 60px;
             display: flex;
@@ -424,7 +531,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow:
-                inset 0 2px 4px rgba(0,0,0,0.5);
+                inset 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .event {
@@ -444,15 +551,15 @@
             left: 6px;
             margin: 2px 0;
             background: linear-gradient(180deg,
-                rgba(255,255,255,0.8) 0%,
-                rgba(200,200,200,0.8) 100%);
+                    rgba(255, 255, 255, 0.8) 0%,
+                    rgba(200, 200, 200, 0.8) 100%);
             color: var(--text-black);
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             box-shadow:
-                inset 0 1px 1px rgba(255,255,255,0.3),
-                0 1px 2px rgba(0,0,0,0.3);
+                inset 0 1px 1px rgba(255, 255, 255, 0.3),
+                0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .event::before {
@@ -471,15 +578,15 @@
         .event:hover {
             transform: translateY(1px);
             box-shadow:
-                inset 0 1px 2px rgba(0,0,0,0.3),
-                0 0 1px rgba(0,0,0,0.5);
+                inset 0 1px 2px rgba(0, 0, 0, 0.3),
+                0 0 1px rgba(0, 0, 0, 0.5);
             z-index: 1000;
         }
 
         .event.master-class {
             background: linear-gradient(180deg,
-                rgba(255,200,100,0.9) 0%,
-                rgba(200,150,50,0.9) 100%);
+                    rgba(255, 200, 100, 0.9) 0%,
+                    rgba(200, 150, 50, 0.9) 100%);
             border-left: 3px solid var(--led-orange);
         }
 
@@ -496,8 +603,8 @@
 
         .event.workshop {
             background: linear-gradient(180deg,
-                rgba(220,220,220,0.9) 0%,
-                rgba(180,180,180,0.9) 100%);
+                    rgba(220, 220, 220, 0.9) 0%,
+                    rgba(180, 180, 180, 0.9) 100%);
             border-left: 3px solid var(--led-orange);
         }
 
@@ -506,11 +613,10 @@
             box-shadow: 0 0 3px var(--led-orange);
         }
 
-        /* DIY workshop events - handle hyphenated class name */
         .event.diy-workshop {
             background: linear-gradient(180deg,
-                rgba(180,200,220,0.9) 0%,
-                rgba(130,150,170,0.9) 100%) !important;
+                    rgba(180, 200, 220, 0.9) 0%,
+                    rgba(130, 150, 170, 0.9) 100%) !important;
             border-left: 3px solid #4a6a8a !important;
         }
 
@@ -521,8 +627,8 @@
 
         .event.ambient {
             background: linear-gradient(180deg,
-                rgba(180,220,200,0.9) 0%,
-                rgba(130,170,150,0.9) 100%);
+                    rgba(180, 220, 200, 0.9) 0%,
+                    rgba(130, 170, 150, 0.9) 100%);
             border-left: 3px solid var(--led-green);
         }
 
@@ -533,8 +639,8 @@
 
         .event.afterparty {
             background: linear-gradient(180deg,
-                rgba(100,100,100,0.9) 0%,
-                rgba(60,60,60,0.9) 100%);
+                    rgba(100, 100, 100, 0.9) 0%,
+                    rgba(60, 60, 60, 0.9) 100%);
             color: var(--panel-silver);
             border-left: 3px solid var(--patch-cable);
         }
@@ -554,9 +660,17 @@
         }
 
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.6; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
 
         .event-time {
@@ -606,8 +720,8 @@
             border-left: 8px solid rgba(255, 255, 255, 0.8);
             font-weight: 700;
             background: linear-gradient(180deg,
-                var(--current-bg) 0%,
-                color-mix(in srgb, var(--current-bg), black 10%) 100%);
+                    var(--current-bg) 0%,
+                    color-mix(in srgb, var(--current-bg), black 10%) 100%);
         }
 
         .event.very-long-event .event-time {
@@ -639,9 +753,9 @@
         .personal-schedule {
             width: 350px;
             background: linear-gradient(180deg,
-                var(--panel-light) 0%,
-                var(--panel-silver) 50%,
-                var(--panel-dark) 100%);
+                    var(--panel-light) 0%,
+                    var(--panel-silver) 50%,
+                    var(--panel-dark) 100%);
             padding: 15px;
             border: 2px solid var(--knob-black);
             border-radius: 0;
@@ -651,9 +765,9 @@
             max-height: calc(100vh - 40px);
             overflow-y: auto;
             box-shadow:
-                inset 0 2px 4px rgba(255,255,255,0.3),
-                inset 0 -2px 4px rgba(0,0,0,0.3),
-                0 4px 8px rgba(0,0,0,0.4);
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+                0 4px 8px rgba(0, 0, 0, 0.4);
         }
 
         .personal-schedule::before {
@@ -688,20 +802,20 @@
             font-size: 12px;
             font-weight: bold;
             box-shadow:
-                inset 0 1px 2px rgba(0,0,0,0.5);
+                inset 0 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         .selected-event {
             background: linear-gradient(180deg,
-                rgba(255,255,255,0.9) 0%,
-                rgba(230,230,230,0.9) 100%);
+                    rgba(255, 255, 255, 0.9) 0%,
+                    rgba(230, 230, 230, 0.9) 100%);
             padding: 8px;
             margin-bottom: 8px;
             border: 1px solid var(--knob-black);
             border-radius: 0;
             box-shadow:
-                inset 0 1px 1px rgba(255,255,255,0.5),
-                0 1px 3px rgba(0,0,0,0.2);
+                inset 0 1px 1px rgba(255, 255, 255, 0.5),
+                0 1px 3px rgba(0, 0, 0, 0.2);
             position: relative;
             animation: slideIn 0.2s ease;
             font-size: 10px;
@@ -713,6 +827,7 @@
                 opacity: 0;
                 transform: translateY(-5px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -722,8 +837,8 @@
         .selected-event.has-conflict {
             border-left: 3px solid var(--led-red);
             background: linear-gradient(180deg,
-                rgba(255,230,230,0.9) 0%,
-                rgba(230,200,200,0.9) 100%);
+                    rgba(255, 230, 230, 0.9) 0%,
+                    rgba(230, 200, 200, 0.9) 100%);
         }
 
         .selected-event::before {
@@ -745,8 +860,15 @@
         }
 
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
         }
 
         .remove-btn {
@@ -763,16 +885,16 @@
             font-weight: bold;
             font-size: 12px;
             box-shadow:
-                inset 0 1px 1px rgba(255,255,255,0.2),
-                0 1px 2px rgba(0,0,0,0.3);
+                inset 0 1px 1px rgba(255, 255, 255, 0.2),
+                0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .remove-btn:hover {
             background: linear-gradient(180deg, #555 0%, #222 100%);
             transform: translateY(1px);
             box-shadow:
-                inset 0 1px 2px rgba(0,0,0,0.3),
-                0 0 1px rgba(0,0,0,0.5);
+                inset 0 1px 2px rgba(0, 0, 0, 0.3),
+                0 0 1px rgba(0, 0, 0, 0.5);
         }
 
         .export-buttons {
@@ -785,8 +907,8 @@
             flex: 1;
             padding: 8px;
             background: linear-gradient(180deg,
-                var(--panel-light) 0%,
-                var(--panel-dark) 100%);
+                    var(--panel-light) 0%,
+                    var(--panel-dark) 100%);
             color: var(--text-black);
             border: 2px solid var(--knob-black);
             border-radius: 0;
@@ -797,8 +919,8 @@
             letter-spacing: 1px;
             transition: all 0.1s;
             box-shadow:
-                inset 0 1px 2px rgba(255,255,255,0.5),
-                0 2px 4px rgba(0,0,0,0.3);
+                inset 0 1px 2px rgba(255, 255, 255, 0.5),
+                0 2px 4px rgba(0, 0, 0, 0.3);
             position: relative;
         }
 
@@ -818,8 +940,8 @@
         .export-btn:hover {
             transform: translateY(1px);
             box-shadow:
-                inset 0 1px 3px rgba(0,0,0,0.3),
-                0 1px 2px rgba(0,0,0,0.3);
+                inset 0 1px 3px rgba(0, 0, 0, 0.3),
+                0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .export-btn:hover::after {
@@ -829,8 +951,8 @@
 
         .clear-btn {
             background: linear-gradient(180deg,
-                #d0a0a0 0%,
-                #a06060 100%);
+                    #d0a0a0 0%,
+                    #a06060 100%);
         }
 
         .clear-btn::after {
@@ -856,15 +978,15 @@
 
         .stats {
             background: linear-gradient(180deg,
-                rgba(240,240,240,0.9) 0%,
-                rgba(200,200,200,0.9) 100%);
+                    rgba(240, 240, 240, 0.9) 0%,
+                    rgba(200, 200, 200, 0.9) 100%);
             padding: 10px;
             border: 1px solid var(--knob-black);
             border-radius: 0;
             margin-bottom: 15px;
             box-shadow:
-                inset 0 1px 2px rgba(255,255,255,0.5),
-                0 1px 3px rgba(0,0,0,0.2);
+                inset 0 1px 2px rgba(255, 255, 255, 0.5),
+                0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .stat-item {
@@ -882,7 +1004,7 @@
             background: var(--knob-black);
             color: var(--led-orange);
             padding: 2px 6px;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         .conflict-warning {
@@ -974,11 +1096,16 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
             <h1>Modular Commune Festival Beijing 2025</h1>
             <div class="subtitle">November 12-16 • 798 CUBE • Interactive Schedule Planner</div>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="zh">中文</button>
+            </div>
         </header>
 
         <div class="controls">
@@ -1034,7 +1161,73 @@
     <div id="tooltip" class="tooltip"></div>
 
     <script>
-        // Complete Event Database - Updated from modularcommune.com/performances-2025/
+        const translations = {
+            en: {
+                title: "Modular Commune Festival Beijing 2025",
+                subtitle: "November 12-16 • 798 CUBE • Interactive Schedule Planner",
+                clickInstruction: "Click to add/remove from schedule",
+                mySchedule: "My Schedule",
+                selectedEvents: "Selected Events",
+                timeConflicts: "Time Conflicts",
+                masterClasses: "Master Classes",
+                export: "Export",
+                clearAll: "Clear All",
+                conflictWarning: "⚠️ You have time conflicts in your schedule!",
+                timeConflict: "⚠️ Time conflict!",
+                confirmClear: "Clear all selected events?",
+                totalEvents: "Total Events",
+                generated: "Generated",
+                exportHeader: "MODULAR COMMUNE FESTIVAL 2025 - MY SCHEDULE",
+                days: {
+                    "2025-11-12": "Wed Nov 12",
+                    "2025-11-13": "Thu Nov 13",
+                    "2025-11-14": "Fri Nov 14",
+                    "2025-11-15": "Sat Nov 15",
+                    "2025-11-16": "Sun Nov 16"
+                },
+                exportDays: {
+                    "2025-11-12": "WEDNESDAY, NOVEMBER 12",
+                    "2025-11-13": "THURSDAY, NOVEMBER 13",
+                    "2025-11-14": "FRIDAY, NOVEMBER 14",
+                    "2025-11-15": "SATURDAY, NOVEMBER 15",
+                    "2025-11-16": "SUNDAY, NOVEMBER 16"
+                }
+            },
+            zh: {
+                title: "交流方式 北京 2025",
+                subtitle: "11月12-16日 • 798 CUBE • 互动日程规划器",
+                clickInstruction: "点击添加/移除日程",
+                mySchedule: "我的日程",
+                selectedEvents: "已选活动",
+                timeConflicts: "时间冲突",
+                masterClasses: "大师课程",
+                export: "导出",
+                clearAll: "清空全部",
+                conflictWarning: "⚠️ 您的日程存在时间冲突！",
+                timeConflict: "⚠️ 时间冲突！",
+                confirmClear: "确定清空所有已选活动吗？",
+                totalEvents: "总活动数",
+                generated: "生成时间",
+                exportHeader: "交流方式 2025 - 我的日程",
+                days: {
+                    "2025-11-12": "周三 11月12日",
+                    "2025-11-13": "周四 11月13日",
+                    "2025-11-14": "周五 11月14日",
+                    "2025-11-15": "周六 11月15日",
+                    "2025-11-16": "周日 11月16日"
+                },
+                exportDays: {
+                    "2025-11-12": "星期三，11月12日",
+                    "2025-11-13": "星期四，11月13日",
+                    "2025-11-14": "星期五，11月14日",
+                    "2025-11-15": "星期六，11月15日",
+                    "2025-11-16": "星期日，11月16日"
+                }
+            }
+        };
+
+        let currentLang = 'en';
+
         const festivalData = {
             "2025-11-12": {
                 masterClasses: [
@@ -1057,7 +1250,7 @@
                         time: "20:00",
                         duration: 180,
                         type: "master-class",
-                        origin: "Russia",
+                        origin: "Barcelona",
                         description: "Modular synthesis masterclass"
                     }
                 ]
@@ -1156,7 +1349,7 @@
                         time: "20:00",
                         duration: 180,
                         type: "master-class",
-                        origin: "KORG",
+                        origin: "Poznan",
                         description: "Modular synthesis masterclass"
                     }
                 ]
@@ -1325,6 +1518,22 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
+            // Load saved language preference
+            const savedLang = localStorage.getItem('modularCommuneLang') || 'en';
+            currentLang = savedLang;
+
+            // Setup language switcher
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    switchLanguage(btn.getAttribute('data-lang'));
+                });
+            });
+
+            // Apply saved language
+            if (savedLang !== 'en') {
+                switchLanguage(savedLang);
+            }
+
             setupEventListeners();
             renderSchedule();
             updatePersonalSchedule();
@@ -1618,6 +1827,7 @@
                 return parseTime(a.time) - parseTime(b.time);
             });
 
+            const t = translations[currentLang];
             container.innerHTML = '';
             let conflicts = 0;
             let masterClassCount = 0;
@@ -1645,7 +1855,13 @@
                 const eventDiv = document.createElement('div');
                 eventDiv.className = `selected-event ${hasConflictFlag ? 'has-conflict' : ''}`;
 
-                const dayLabel = {
+                const dayLabel = currentLang === 'zh' ? {
+                    '2025-11-12': '周三',
+                    '2025-11-13': '周四',
+                    '2025-11-14': '周五',
+                    '2025-11-15': '周六',
+                    '2025-11-16': '周日'
+                }[event.day] : {
                     '2025-11-12': 'Wed',
                     '2025-11-13': 'Thu',
                     '2025-11-14': 'Fri',
@@ -1660,7 +1876,7 @@
                         ${dayLabel} ${event.time || 'TBD'} • ${event.venue}
                         ${event.origin ? ` • ${event.origin}` : ''}
                     </div>
-                    ${hasConflictFlag ? '<div style="color: var(--warning); font-size: 11px; margin-top: 5px;">⚠️ Time conflict!</div>' : ''}
+                    ${hasConflictFlag ? `<div style="color: var(--warning); font-size: 11px; margin-top: 5px;">${t.timeConflict}</div>` : ''}
                 `;
 
                 container.appendChild(eventDiv);
@@ -1683,8 +1899,39 @@
             updatePersonalSchedule();
         }
 
+        function switchLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('modularCommuneLang', lang);
+
+            const t = translations[lang];
+
+            document.querySelector('h1').textContent = t.title;
+            document.querySelector('.subtitle').textContent = t.subtitle;
+            document.querySelector('.personal-schedule h2').innerHTML = `${t.mySchedule} <span class="event-count">${selectedEvents.length}</span>`;
+
+            document.querySelectorAll('.stat-item')[0].querySelector('span').textContent = t.selectedEvents + ':';
+            document.querySelectorAll('.stat-item')[1].querySelector('span').textContent = t.timeConflicts + ':';
+            document.querySelectorAll('.stat-item')[2].querySelector('span').textContent = t.masterClasses + ':';
+
+            document.querySelectorAll('.export-btn')[0].textContent = t.export;
+            document.querySelectorAll('.export-btn')[1].textContent = t.clearAll;
+
+            document.getElementById('conflictWarning').textContent = t.conflictWarning;
+
+            document.querySelectorAll('.day-tab').forEach(tab => {
+                const day = tab.getAttribute('data-day');
+                tab.textContent = t.days[day];
+            });
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+
+            renderSchedule();
+        }
+
         function clearSchedule() {
-            if (confirm('Clear all selected events?')) {
+            if (confirm(translations[currentLang].confirmClear)) {
                 selectedEvents = [];
                 localStorage.setItem('modularCommuneSchedule', JSON.stringify(selectedEvents));
                 renderSchedule();
@@ -1705,20 +1952,15 @@
                 return parseTime(a.time) - parseTime(b.time);
             });
 
-            let text = 'MODULAR COMMUNE FESTIVAL 2025 - MY SCHEDULE\n';
-            text += '=' .repeat(50) + '\n\n';
+            const t = translations[currentLang];
+            let text = t.exportHeader + '\n';
+            text += '='.repeat(50) + '\n\n';
 
             let currentExportDay = '';
             sortedEvents.forEach(event => {
                 if (event.day !== currentExportDay) {
                     currentExportDay = event.day;
-                    const dayLabel = {
-                        '2025-11-12': 'WEDNESDAY, NOVEMBER 12',
-                        '2025-11-13': 'THURSDAY, NOVEMBER 13',
-                        '2025-11-14': 'FRIDAY, NOVEMBER 14',
-                        '2025-11-15': 'SATURDAY, NOVEMBER 15',
-                        '2025-11-16': 'SUNDAY, NOVEMBER 16'
-                    }[event.day];
+                    const dayLabel = t.exportDays[event.day];
                     text += '\n' + dayLabel + '\n' + '-'.repeat(30) + '\n';
                 }
 
@@ -1750,18 +1992,18 @@
                 text += '\n';
             });
 
-            text += '\n' + '=' .repeat(50) + '\n';
-            text += `Total Events: ${selectedEvents.length}\n`;
-            text += `Generated: ${new Date().toLocaleString()}\n`;
+            text += '\n' + '='.repeat(50) + '\n';
+            text += `${t.totalEvents}: ${selectedEvents.length}\n`;
+            text += `${t.generated}: ${new Date().toLocaleString()}\n`;
 
             // Create download with timestamp in filename
             const now = new Date();
             const timestamp = now.getFullYear() +
-                              (now.getMonth() + 1).toString().padStart(2, '0') +
-                              now.getDate().toString().padStart(2, '0') + '_' +
-                              now.getHours().toString().padStart(2, '0') +
-                              now.getMinutes().toString().padStart(2, '0') +
-                              now.getSeconds().toString().padStart(2, '0');
+                (now.getMonth() + 1).toString().padStart(2, '0') +
+                now.getDate().toString().padStart(2, '0') + '_' +
+                now.getHours().toString().padStart(2, '0') +
+                now.getMinutes().toString().padStart(2, '0') +
+                now.getSeconds().toString().padStart(2, '0');
 
             const blob = new Blob([text], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
@@ -1774,13 +2016,14 @@
 
         function showTooltip(e, event) {
             const tooltip = document.getElementById('tooltip');
+            const t = translations[currentLang];
             tooltip.innerHTML = `
                 <strong>${event.artist}</strong><br>
                 ${event.time || 'Time TBD'} • ${event.duration} min<br>
                 ${event.origin ? `From: ${event.origin}<br>` : ''}
                 ${event.topic ? `Topic: ${event.topic}<br>` : ''}
                 ${event.description ? `${event.description}<br>` : ''}
-                <em>Click to add/remove from schedule</em>
+                <em>${t.clickInstruction}</em>
             `;
             tooltip.style.display = 'block';
             tooltip.style.left = e.pageX + 10 + 'px';
@@ -1823,4 +2066,5 @@
         }
     </script>
 </body>
+
 </html>
